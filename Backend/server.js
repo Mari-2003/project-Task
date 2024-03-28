@@ -1,4 +1,5 @@
 const express = require("express");
+const bodyParser = require('body-parser')
 require("dotenv").config()
 const db = require("./src/config/db");
 const Router = require('./src/routes/userRoutes') 
@@ -9,6 +10,8 @@ const app = express();
 
 //middleware
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 //database connection 
 db.once('open',()=> console.log("connected"))
