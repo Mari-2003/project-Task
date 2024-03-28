@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
         required:true
     },
     fileUpload:{
-        type: String,
+        type: Object,
         required:true
     },
     role:{

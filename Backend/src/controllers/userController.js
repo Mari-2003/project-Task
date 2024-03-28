@@ -1,7 +1,8 @@
 const bcrypt = require('bcrypt')
 
 const users = require('../models/userSchema');
-const {validationResponse,successResponse,errorResponse} = require('../exception/responseFormat')
+const {validationResponse,successResponse,errorResponse} = require('../exception/responseFormat');
+const sendNotificationMail = require("../utils/emailNotification")
 
 const signUp = async (req, res) => {
     const { name, email, mobileNumber, role, password } = req.body;
@@ -139,11 +140,53 @@ const login = async (req, res) => {
         console.error(error);
         res.status(500).json(errorResponse());
     }
+};
+
+
+
+const sendOtp = async(req,res)=>{
+    const {email} =req.body;
+     try{
+        const sendNotification = await sendNotificationMail(email,"verifyOtp")
+        res.status(200).json(successResponse(200,"Email Send Successfully",sendNotification))
+
+    }catch(error){
+        console.log(error);
+        res.status(500).json(errorResponse());
+
+    }
 }
 
+
+const getOneUserDetails = async(req,res)=>{
+   try{
+    const findUser = await users.find({
+        id:req.user[0]._id,
+    });
+    res.status(200).json(successResponse(200,"User Retrieve Successfully",findUser))
+
+}catch(error){
+    console.log(error);
+    res.status(500).json(errorResponse());
+}
+}
+
+
+const getAllUserDetails = async(req,res)=>{
+    try{
+        const findAllUser = await users.findAll();
+        res.statsu(200).json(successResponse(200,"All User Details Retrieve Successfully",findAllUser))
+    }catch(error){
+    console.log(error);
+    res.status(500).json(errorResponse()); 
+    }
+}
 
 
 module.exports = {
     signUp,
-    login
+    login,
+    sendOtp,
+    getOneUserDetails,
+    getAllUserDetails
 };
