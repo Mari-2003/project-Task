@@ -159,9 +159,10 @@ const sendOtp = async(req,res)=>{
 
 
 const getOneUserDetails = async(req,res)=>{
+    const {userId} = req.params;
    try{
     const findUser = await users.find({
-        id:req.user[0]._id,
+        id:userId,
     });
     res.status(200).json(successResponse(200,"User Retrieve Successfully",findUser))
 
@@ -174,8 +175,8 @@ const getOneUserDetails = async(req,res)=>{
 
 const getAllUserDetails = async(req,res)=>{
     try{
-        const findAllUser = await users.findAll();
-        res.statsu(200).json(successResponse(200,"All User Details Retrieve Successfully",findAllUser))
+        const findAllUser = await users.find();
+        res.status(200).json(successResponse(200,"All User Details Retrieve Successfully",findAllUser))
     }catch(error){
     console.log(error);
     res.status(500).json(errorResponse()); 
