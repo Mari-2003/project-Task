@@ -47,6 +47,10 @@ async function sendNotificationMail(email, action) {
             },
         });
         await transporter.sendMail(mailOptions);
+        const data = {
+            otpCode : otpCode
+        }
+        return data
     } catch (error) {
         console.error(error);
     }

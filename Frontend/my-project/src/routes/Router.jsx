@@ -1,11 +1,11 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
-import {Login} from '../components/signin/Login'; 
 import { Dashboard } from '../components/Dashboard';
-import { UserDashboard } from '../components/UserDashboard';
-import { EmailVerifyPage } from '../components/EmailVerifyPage';
-import { OtpPage } from '../components/OtpPage';
-import { SignUp } from '../components/signup/SignUp';
+import  SignUp from '../components/signup/SignUp';
+import Login from '../components/signin/Login';
+import UserDashboard from '../components/UserDashboard';
+import EmailVerifyPage from '../components/EmailVerifyPage';
+import OtpPage from '../components/OtpPage'
 
 
 export const router = createBrowserRouter([
@@ -22,12 +22,12 @@ export const router = createBrowserRouter([
     element:<Dashboard />
 },
 {
-    path:'/user',
+    path: '/user/:id',
     element:<UserDashboard/>
 },
 {
     path:'/email',
-    element:<EmailVerifyPage />
+    element:< EmailVerifyPage/>
 },
 {
     path:'/otp',

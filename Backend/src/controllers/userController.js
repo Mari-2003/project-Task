@@ -1,4 +1,5 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
 
 const users = require('../models/userSchema');
 const {validationResponse,successResponse,errorResponse} = require('../exception/responseFormat');
@@ -124,10 +125,10 @@ const login = async (req, res) => {
         }
 
         // Generate access token
-        const accessToken = jwt.sign({ userId: existingUser._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+        const accessToken = jwt.sign({ userId: userDetails._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
 
         // Generate refresh token
-        const refreshToken = jwt.sign({ userId: existingUser._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' });
+        const refreshToken = jwt.sign({ userId: userDetails._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' });
 
         const data = {
             accessToken,
@@ -159,10 +160,10 @@ const sendOtp = async(req,res)=>{
 
 
 const getOneUserDetails = async(req,res)=>{
-    const {userId} = req.params;
+    const {id} = req.params;
    try{
-    const findUser = await users.find({
-        id:userId,
+    const findUser = await users.findOne({
+        _id:id,
     });
     res.status(200).json(successResponse(200,"User Retrieve Successfully",findUser))
 

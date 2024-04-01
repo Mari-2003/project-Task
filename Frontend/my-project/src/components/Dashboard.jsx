@@ -37,26 +37,25 @@ export const Dashboard = () => {
             <th className='px-4 py-2'>Delete</th>
         </tr>
         </thead>
-
         <tbody>
-        {Array.isArray(users) && users?.map((user,index) =>{
-            return (
-                <tr className='flex-wrap' key={user.id}>
-                <td className='px-4 py-2'>{index + 1}</td>
-                <td className='px-4 py-2'>{user.name}</td>
-                <td className='px-4 py-2'>{user.email}</td>
-                <td className='px-4 py-2'>{user.mobileNumber}</td>
-                <td className='px-4 py-2'>
-                    <button className='bg-lime-600 font-semibold px-2 py-1 hover:bg-green-500 rounded'>Edit</button>
-                </td>
-                <td className='px-4 py-2'>
-                    <button className='bg-gray-500 font-semibold px-2 py-1 hover:bg-gray-400  rounded '>Delete</button>
-                </td>
-            </tr>
-            )
-        })}
-        </tbody>
-            
+  {Array.isArray(users) && users.map((user) => {
+    return (
+      <tr className='flex-wrap'>
+        <td className='px-4 py-2'>{user.id}</td>
+        <td className='px-4 py-2'>{user.name}</td>
+        <td className='px-4 py-2'>{user.email}</td>
+        <td className='px-4 py-2'>{user.mobileNumber}</td>
+        <td className='px-4 py-2'>
+          <button className='bg-lime-600 font-semibold px-2 py-1 hover:bg-green-500 rounded'>Edit</button>
+        </td>
+        <td className='px-4 py-2'>
+          <button className='bg-gray-500 font-semibold px-2 py-1 hover:bg-gray-400 rounded'>Delete</button>
+        </td>
+      </tr>
+    );
+  })}
+</tbody>
+
     </table>
 
 
