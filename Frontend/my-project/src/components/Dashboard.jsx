@@ -38,10 +38,10 @@ export const Dashboard = () => {
         </tr>
         </thead>
         <tbody>
-  {Array.isArray(users) && users.map((user) => {
+  {Array.isArray(users) && users.map((user,index) => {
     return (
-      <tr className='flex-wrap'>
-        <td className='px-4 py-2'>{user.id}</td>
+      <tr className='flex-wrap' >
+        <td className='px-4 py-2'>{index+1}</td>
         <td className='px-4 py-2'>{user.name}</td>
         <td className='px-4 py-2'>{user.email}</td>
         <td className='px-4 py-2'>{user.mobileNumber}</td>

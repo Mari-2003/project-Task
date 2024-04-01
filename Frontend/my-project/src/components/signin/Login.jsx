@@ -38,7 +38,7 @@ const Login = () => {
       try {
         const response = await login(values).unwrap();
         if (response.statusCode === 200 || response.statusCode === 201) {
-          if (values.email === 'admin@gmail.com') {
+          if (response.data.userDetails.role === 'Admin') {
             navigate('/dashboard');
           } else {
             const id = response.data.userDetails._id;
